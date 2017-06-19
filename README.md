@@ -66,12 +66,12 @@ July 17-21, 2017 Quebec City, Canada.
 
 ### Algorithms
 The solving algorithms included compute an exact complete set of non-dominated points
-- Generic algorithm for structured or non-structured discrete problems: 
+- vOptGeneric: generic algorithms for structured or non-structured discrete problems,
     - Haimes1971: epsilon-constraint method / 2ILP (Julia+JuMP)
     - [Aneja1979: Aneja & Nair method / 2ILP]
     - [Chalmet1986: Chalmet et al. method / 2ILP]
     - [Vincent2013: branch-and-cut / 2MILP]
-- Specific algorithm for structured (MOCO/MOMILP) problem: 
+- vOptSpecific: specific algorithms for structured (MOCO/MOMILP) problem,
     - Wassenhove1980: 2OSP1980 (Julia)
     - Przybylski2008: 2LAP2008 (C)
     - [Jorge2010: 2UKP2010 (C++); Gandibleux2012: 2UDFLP2012 (C++); Delmee2017: 2UMFLP2016 (C++); Gandibleux2006: PATHS (C)]
