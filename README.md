@@ -30,7 +30,7 @@ Install it, and then have fun with vOptSolver.
 
 Resources availables:
 
-- [Examples](https://github.com/xgandibleux/vOptSolver/tree/master/examples/): 
+- Examples: 
     - problems ready to be solved
-- [Documentation](https://github.com/xgandibleux/vOptSolver/tree/master/doc/): 
+- Documentation: 
     - description of the Application Programming Interface 
