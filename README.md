@@ -1,8 +1,6 @@
 # Solver of multiobjective linear optimization problems
 
-**vOptSolver** is a solver of multiobjective linear optimization problems (MOCO, MOILP, MOMILP, MOLP). 
-
-This repository concerns **vOptSpecific**, the part of **vOptSolver devoted to multiobjective structured problems**. With vOptSpecific, the problem is expressed using an Application Programming Interface.
+This repository concerns **vOptSpecific**, the part of **vOptSolver** devoted to **multiobjective structured problems**. With vOptSpecific, the problem is expressed using an Application Programming Interface.
 
 We suppose you are familiar with vOptSolver; if not, read first this [presentation](https://voptsolver.github.io/vOptSolver/).
 
