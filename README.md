@@ -29,6 +29,6 @@ That's all folk!
 Install it, and then have fun with vOptSolver. 
 
 
-## Examples: 
+## Examples 
 Problems ready to be solved are in folder examples
 
