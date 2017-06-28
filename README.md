@@ -28,9 +28,7 @@ That's all folk!
 
 Install it, and then have fun with vOptSolver. 
 
-Resources availables:
 
-- Examples: 
-    - problems ready to be solved
-- Documentation: 
-    - description of the Application Programming Interface 
+## Examples: 
+Problems ready to be solved are in folder examples
+
