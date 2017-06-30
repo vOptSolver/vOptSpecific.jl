@@ -27,16 +27,22 @@ That's all folk; at this point, vOptSpecific is properly installed.
 ### Usage Instructions
 
 When vOptSpecific is properly installed,
+
+On linux or in the cloud (juliaBox):
+
 1. open a console on your computer or in the cloud
-2. when the prompt is ready, type in the console 
-```
-> julia
-```
-3. when the prompt `julia` is ready, type in the console;
+2. when the prompt is ready, type in the console `julia`
+
+On macOS:
+
+1. locate the application `julia` and click on the icon, the julia console appears
+
+
+When the prompt `julia` is ready, type in the console;
 ```
 julia> using vOptSpecific
 ```
-Have fun with the solver! 
+Have fun with the solver! Get a look on examples. 
 
 
 ## Examples 
