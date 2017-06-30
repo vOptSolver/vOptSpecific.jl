@@ -51,3 +51,5 @@ vOptSpecific is ready. See examples for further informations and have fun with t
 ## Examples 
 The folder `examples` provides (1) source code of problems ready to be solved and (2) selected datafiles into different formats.
 
+## Limitations
+- The problem size for 2LAP is limited to 500x500.
