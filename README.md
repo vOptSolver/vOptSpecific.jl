@@ -16,7 +16,7 @@ For a local use, a working version of:
 Before your first local or distant use, (1) run Julia and when the terminal is ready, (2) add as follow the two mandatory packages to your Julia distribution: 
 
 
-```
+```julia
 julia> Pkg.clone("http://github.com/vOptSolver/vOptSpecific.jl")
 julia> Pkg.build("vOptSpecific")
 ```
@@ -29,5 +29,5 @@ Install vOptSpecific, and then have fun with the solver.
 
 
 ## Examples 
-Problems ready to be solved and selected datafiles into different formats are provided in the folder 'examples'.
+Problems ready to be solved and selected datafiles into different formats are provided in the folder `examples`.
 
