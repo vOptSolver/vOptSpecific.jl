@@ -11,10 +11,22 @@ For a local use, a working version of:
 - Julia must be ready; instructions for the installation are available [here](https://julialang.org/downloads/)
 - your favorite C/C++ compiler must be ready (GCC is suggested)
 
+### Run Julia
+
+On linux or in the cloud (juliaBox):
+
+- open a console on your computer or in the cloud
+- when the prompt is ready, type in the console `julia`
+
+On macOS:
+
+- locate the application `julia` and 
+- click on the icon, the julia console comes to the screen
+
 ### Installation Instructions
 
 Before your first local or distant use, 
-1. run Julia and when the terminal is ready, 
+1. run Julia and when the terminal is ready with the prompt `julia` on screen, 
 2. add as follow the two mandatory packages to your Julia distribution: 
 
 ```
@@ -28,17 +40,8 @@ That's all folk; at this point, vOptSpecific is properly installed.
 
 When vOptSpecific is properly installed,
 
-On linux or in the cloud (juliaBox):
-
-- open a console on your computer or in the cloud
-- when the prompt is ready, type in the console `julia`
-
-On macOS:
-
-- locate the application `julia` and 
-- click on the icon, the julia console comes to the screen
-
-When the prompt `julia` is ready, type in the console;
+1. run Julia and when the terminal is ready with the prompt `julia` on screen, 
+2. invoke vOptSpecific in typing in the console:
 ```
 julia> using vOptSpecific
 ```
