@@ -24,7 +24,7 @@ C2 = [16 5 6 19 12 7 18 19 16 10 ;
 
 id = set2LAP(10, C1, C2)
 solver = LAP_Przybylski2008()
-z1,z2,solutions = solveLAP(id, solver)
+z1,z2,solutions = vSolve(id, solver)
 
 
 for i = 1:length(z1)

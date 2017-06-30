@@ -17,7 +17,7 @@ type LAPsolver
     solve::Function#::Function(id::_2LAP) -> ...
 end
 
-function solveLAP(id::_2LAP, solver::LAPsolver = LAP_Przybylski2008())
+function vSolve(id::_2LAP, solver::LAPsolver = LAP_Przybylski2008())
     solver.solve(id)
 end
 
