@@ -42,7 +42,8 @@ When the prompt `julia` is ready, type in the console;
 ```
 julia> using vOptSpecific
 ```
-Have fun with the solver! Get a look on examples. 
+vOptSpecific is ready. See examples for further informations. 
+Have fun with the solver!
 
 
 ## Examples 
