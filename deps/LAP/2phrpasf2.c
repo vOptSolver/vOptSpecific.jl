@@ -1,10 +1,10 @@
 /**--------------------------------------------------
 
-    \file complet.c
+    \file Solver bi-objective LAP
     \brief Determination des solutions efficaces du probleme bicritere d'affectation
 
-    \author Anthony PRZYBYLSKI (promoteur : Xavier GANDIBLEUX)
-    \date Juin 2003
+    \authors Anthony PRZYBYLSKI, Xavier GANDIBLEUX
+    \date Juin 2005
 
  -------------------------------------------------*/
 
