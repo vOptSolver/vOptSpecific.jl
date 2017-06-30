@@ -22,13 +22,23 @@ julia> Pkg.clone("http://github.com/vOptSolver/vOptSpecific.jl")
 julia> Pkg.build("vOptSpecific")
 ```
 
-That's all folk! 
+That's all folk; at this point, vOptSpecific is properly installed.
 
 ### Usage Instructions
 
-Install vOptSpecific, and then have fun with the solver. 
+When vOptSpecific is properly installed,
+1. open a console on your computer or in the cloud
+2. when the prompt is ready, type in the console 
+```
+> julia
+```
+3. when the prompt `julia` is ready, type in the console;
+```
+julia> using vOptSpecific
+```
+Have fun with the solver! 
 
 
 ## Examples 
-the folder `examples` provides (1) source code of problems ready to be solved and (2) selected datafiles into different formats.
+The folder `examples` provides (1) source code of problems ready to be solved and (2) selected datafiles into different formats.
 
