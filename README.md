@@ -7,11 +7,11 @@ We suppose you are familiar with vOptSolver; if not, read first this [presentati
 
 
 ## Instructions 
-
-### Installation Instructions
 For a local use, a working version of:
 - Julia must be ready; instructions for the installation are available [here](https://julialang.org/downloads/)
 - your favorite C/C++ compiler must be ready (GCC is suggested)
+
+### Installation Instructions
 
 Before your first local or distant use, 
 1. run Julia and when the terminal is ready, 
