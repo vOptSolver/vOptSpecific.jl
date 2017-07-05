@@ -23,9 +23,7 @@ C2 = [16 5 6 19 12 7 18 19 16 10 ;
 10 10 1 0 0 10 10 3 19 17 ]
 
 id = set2LAP(10, C1, C2)
-solver = LAP_Przybylski2008()
-z1,z2,solutions = vSolve(id, solver)
-
+z1,z2,solutions = vSolve(id)
 
 for i = 1:length(z1)
     println("(" , z1[i], " | ", z2[i], ") : ", solutions[i,:])
