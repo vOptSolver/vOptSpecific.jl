@@ -5,12 +5,12 @@ export vSolve,
     load2OSP, set2OSP, OSP_VanWassenhove1980, generateHardInstance
         #KP, solveKP, KP_Jorge2010
 
-const LIBPATH = joinpath(dirname(@__FILE__),"..","deps")
-
+const libLAPpath = joinpath(@__DIR__, "..", "deps", "libLAP.so")
 
 include("LAP.jl")
 include("jMOScheduling.jl")
 # include("KP.jl")
 
+__init__() = !isfile(libLAPpath) && Pkg.build("vOptSpecific")
 
 end # module

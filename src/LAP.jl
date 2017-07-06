@@ -22,16 +22,14 @@ function vSolve(id::_2LAP, solver::LAPsolver = LAP_Przybylski2008())
 end
 
 function LAP_Przybylski2008()::LAPsolver
-    mylibvar = joinpath(LIBPATH,"libLAP.so")
-
     f = (id::_2LAP) -> begin 
         nSize, C1, C2 = Cint(id.nSize), reshape(convert(Matrix{Cint}, id.C1), Val{1}), reshape(convert(Matrix{Cint}, id.C2), Val{1})
         p_z1,p_z2,p_solutions,p_nbsolutions = Ref{Ptr{Cint}}() , Ref{Ptr{Cint}}(), Ref{Ptr{Cint}}(), Ref{Cint}()
-        @eval ccall(
-            (:solve_bilap_exact, $mylibvar),
+        ccall(
+            (:solve_bilap_exact, libLAPpath),
             Void,
             (Ref{Cint},Ref{Cint}, Cint, Ref{Ptr{Cint}}, Ref{Ptr{Cint}}, Ref{Ptr{Cint}}, Ref{Cint}),
-            $C1, $C2, $nSize, $p_z1, $p_z2, $p_solutions, $p_nbsolutions)
+            C1, C2, nSize, p_z1, p_z2, p_solutions, p_nbsolutions)
         nbSol = p_nbsolutions.x
         z1,z2 = convert(Array{Int,1},unsafe_wrap(Array, p_z1.x, nbSol, true)), convert(Array{Int,1},unsafe_wrap(Array, p_z2.x, nbSol, true))
         solutions = convert(Array{Int,2},reshape(unsafe_wrap(Array, p_solutions.x, nbSol*id.nSize, true), (id.nSize, nbSol)))
