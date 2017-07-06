@@ -30,6 +30,7 @@ immutable _2OSP
   n ::Int      # number of tasks (positive integer value)
   p ::Vector{Int}# vector of processing time (positive integer values)
   d ::Vector{Int}# vector of due dates (non-negative integer values)
+  r ::Vector{Int}#vector of release dates (non-negative integer values)
   w ::Vector{Int}# vector of weights (non-negative integer values)
 end
 
@@ -389,21 +390,22 @@ function solveOSP(data::_2OSP, displayYN, displayPrint)
   # display on screen a summary of the solving process
   displaySummary(env, YN, elapsedTime)
 
-  return YN
+  return map(x -> x.z1, YN), map(x -> x.z2, YN), map(x -> x.x, YN)
 
   # ==========================================================================
 
 end
 
 
-set2OSP(n::Int, p::Vector{Int}, d::Vector{Int}, w::Vector{Int}=ones(Int,n)) = begin
+set2OSP(n::Int, p::Vector{Int}, d::Vector{Int}, r::Vector{Int}=zeros(Int,n), w::Vector{Int}=ones(Int,n)) = begin
     @assert n==length(p)==length(d)==length(w)
     @assert all(x->x>0, p)
     @assert all(x->x>=0, d)
+    @assert all(x->x>=0, r)
     @assert all(x->x>=0, w)
-    _2OSP(n,p,d,w)
+    _2OSP(n,p,d,r,w)
 end
-set2OSP(p::Vector{Int},d::Vector{Int},w::Vector{Int}=ones(Int,length(p))) = set2OSP(length(p),p,d,w)
+set2OSP(p::Vector{Int},d::Vector{Int},r::Vector{Int}=zeros(Int,length(p)),w::Vector{Int}=ones(Int, length(p))) = set2OSP(length(p),p,d,r,w)
 
 
 type OSPSolver
