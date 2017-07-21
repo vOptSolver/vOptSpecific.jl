@@ -420,4 +420,15 @@ function vSolve(id::_2OSP, solver::OSPSolver = OSP_VanWassenhove1980())
     solver.solve(id)
 end
 
-load2OSP(fname::AbstractString) = nothing
+function load2OSP(fname::AbstractString)
+    f = open(fname)
+    n = parse(Int, readline(f))
+    data = convert(Matrix{Int}, readdlm(f))
+    p = data[1,:]
+    d = data[2,:]
+    r = data[3,:]
+    w = data[4,:]
+    close(f)
+    return set2OSP(p,d,r,w)
+end
+
