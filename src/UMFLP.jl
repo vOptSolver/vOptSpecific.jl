@@ -85,7 +85,7 @@ function UMFLP_Delmee2017(; modeVerbose = false, modeUpperBound = true, modeLowe
             ind += nbAlloc[i]
             push!(X, sm)
         end
-        return z1, z2, facility_res, X
+        return z1, z2, facility_res, X, isEdge
     end
 
     return UMFLPsolver(f)

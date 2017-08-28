@@ -8,7 +8,7 @@ cd("UMFLP") do
     run(`make`)
 end
 
-# cd("knapsack") do
-#     run(`make`)
-# end
+cd("Combo") do
+    run(`make`)
+end
 
