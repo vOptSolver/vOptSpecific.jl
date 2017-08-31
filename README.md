@@ -1,5 +1,8 @@
 # vOptSpecific: part of vOptSolver for structured problems
 
+[![Build Status](https://travis-ci.org/vOptSolver/vOptSpecific.jl.svg?branch=master)](https://travis-ci.org/vOptSolver/vOptSpecific.jl)
+[![codecov.io](http://codecov.io/github/vOptSolver/vOptSpecific.jl/coverage.svg?branch=master)](http://codecov.io/github/vOptSolver/vOptSpecific.jl?branch=master)
+
 **vOptSolver** is a solver of multiobjective linear optimization problems (MOCO, MOIP, MOMILP, MOLP).
 This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP). With vOptSpecific, the problem is expressed using an Application Programming Interface.
 
