@@ -20,9 +20,12 @@ export solve, problem, loadKP
 function solve(pb::problem, output=true)
     reduce_problem!(pb, output)
     XSE1m = first_phase(pb)
-    X = second_phase(XSE1m, output)
-    z1 = map(obj_1, X)
-    z2 = map(obj_2, X)
+    if length(XSE1m) == 1
+        X = XSE1m
+    else
+        X = second_phase(XSE1m, output)
+    end
+    z1, z2 = map(obj_1, X), map(obj_2, X)
     w = map(weight, X)
     x = map(full_variable_vector, X)
     z1, z2, w, x

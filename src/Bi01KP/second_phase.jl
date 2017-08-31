@@ -155,7 +155,6 @@ function second_phase(XSE::Vector{solution}, output::Bool)
         # output && plot_triangle(Δ)
 
         OΔ = explore_triangle(Δ, output)
-        println()
         append!(res, Δ.XΔ)
 
         for sol in OΔ

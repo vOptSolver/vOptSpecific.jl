@@ -54,7 +54,7 @@ function generateDidacticInstance(idInstance::String)::_2OSP
     #   Foundations of Computing and Decision Sciences 26 (1), 23-50.
     #   http://fcds.cs.put.poznan.pl/FCDS2/PastIssues.aspx
     nTasks = 4
-    data = _2OSP(nTasks, [3, 4, 5, 6], [20, 16, 11, 5], [1, 1, 1, 1])
+    data = _2OSP(nTasks, [3, 4, 5, 6], [20, 16, 11, 5], [1, 1, 1, 1], ones(nTasks))
     return data
 
   elseif idInstance == "1980_4"
@@ -63,8 +63,8 @@ function generateDidacticInstance(idInstance::String)::_2OSP
     #   Solving a bicriterion scheduling problem.
     #   European Journal of Operational Research 4 (1980) 42-48.
     nTasks = 4
-    data = _2OSP(nTasks, [2, 4, 3, 1], [1, 2, 4, 6], [1, 1, 1, 1])
-    # data = _2OSP(nTasks, [2, 3, 1, 2], [3, 4, 5, 6], [1, 1, 1, 1])
+    data = _2OSP(nTasks, [2, 4, 3, 1], [1, 2, 4, 6], [1, 1, 1, 1], ones(nTasks))
+    # data = _2OSP(nTasks, [2, 3, 1, 2], [3, 4, 5, 6], [1, 1, 1, 1], ones(nTasks))
     return data
 
   elseif idInstance == "1980_10"
@@ -76,7 +76,8 @@ function generateDidacticInstance(idInstance::String)::_2OSP
     data = _2OSP(nTasks,
                   [9, 9, 6, 7, 2, 4, 7, 2, 7, 8],
                   [32, 49, 7, 25, 55, 9, 54, 40, 52, 51], 
-                  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+                  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 
+                  ones(nTasks))
     return data
 
   end
@@ -85,7 +86,7 @@ end
 # ==========================================================================
 # Generate a parameterized random instance
 function generateRandomInstance(nTasks::Int, pMax::Int, dMax::Int, wMax::Int)::_2OSP
-  data = _2OSP(nTasks, rand(1:pMax, nTasks), rand(1:dMax, nTasks), rand(1:wMax, nTasks))
+  data = _2OSP(nTasks, rand(1:pMax, nTasks), rand(1:dMax, nTasks), rand(1:wMax, nTasks), ones(nTasks))
   return data
 end
 
@@ -111,7 +112,7 @@ function generateHardInstance(nTasks::Int;  pMax::Int = 30, LF::Float64 = 0.3, R
   data_p = rand(1:pMax, nTasks)
   MP = sum(data_p)
   data_d = max.(0 , rand( floor(Int, (1-LF-RDD/2)*MP) : floor(Int, (1-LF+RDD/2)*MP) , nTasks))
-  data = _2OSP(nTasks, data_p, data_d, ones(Int,nTasks))
+  data = _2OSP(nTasks, data_p, data_d, ones(Int,nTasks), ones(nTasks))
   return data
 end
 

@@ -349,8 +349,6 @@ function reduce_by_domination(mp::mono_problem, Δ)
 
         ideal = (ub_z1_i0, ub_z2_i0)
         if any(x -> x > ideal, Δ.XΔ)
-            @show ideal
-            println(map(obj, Δ.XΔ))
             push!(C1, i)
         else
             ub_z1_i1 = relax(varview_1, mp.p1, mp.w, mp.min_profit_1 + mp.p1[v], mp.ω + mp.w[v], mp.c)
