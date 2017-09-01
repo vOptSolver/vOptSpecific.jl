@@ -11,11 +11,11 @@ end
 
 Base.show(io::IO, id::_2UMFLP) = println("Bi-Objective Facility Location Problem with $(id.m) customers and $(id.n) facilities.")
 
-set2UMFLP(n,m,A1,A2,R1,R2) = begin
+set2UMFLP(m,n,A1,A2,R1,R2) = begin
     @assert size(A1,2) == length(R1)
     @assert n == size(A1, 1) == size(A2, 1)
     @assert m == size(A1, 2) == size(A2, 2) == length(R1) == length(R2)
-    return _2UMFLP(n,m,A1,A2,R1,R2)
+    return _2UMFLP(m,n,A1,A2,R1,R2)
 end
 set2UMFLP(A1,A2,R1,R2) = set2UMFLP(size(A1,1), size(A1,2), A1, A2, R1, R2)
 
