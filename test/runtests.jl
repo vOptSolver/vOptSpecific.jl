@@ -38,15 +38,15 @@ z1,z2,solutions = vSolve(id)
 
 
 
-println("\nTesting 2KP...")
-id = set2KP([1,2,3], [4,5,6], [7,8,9], 16)
+println("\nTesting 2UKP...")
+id = set2UKP([1,2,3], [4,5,6], [7,8,9], 16)
 z1, z2, w, solutions = vSolve(id)
 
 @test z1 == [4]
 @test w == [16]
 @test solutions == [[1, 0, 1]]
 
-id = load2KP("../examples/2KP500-1A.DAT")
+id = load2UKP("../examples/2KP500-1A.DAT")
 z1, z2, w, solutions = vSolve(id)
 @assert length(z1) == 1682
 @assert extrema(z1) == (16028, 20360)
