@@ -1,3 +1,5 @@
+# MIT License
+# Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 type vertex
     layer::Int #index of the layer in the graph
     i::Int  #index of the variable

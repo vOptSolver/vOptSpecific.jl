@@ -1,3 +1,5 @@
+# MIT License
+# Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 module Bi01KP
 
 using DataStructures
@@ -15,7 +17,6 @@ include("graph.jl")
 # include("BoundSetReduction.jl")
 
 const libcomboPath = joinpath(@__DIR__,"..","..","deps","libcombo.so")
-export solve, problem, loadKP
 
 function solve(pb::problem, output=true)
     reduce_problem!(pb, output)
@@ -59,19 +60,6 @@ function parseKP(fname::AbstractString)
         w = x[2n+1:3n]
     end
     return problem(p1,p2,w,c)
-end
-
-function loadKP(fname)
-    f = open(fname)
-    n = parse(readline(f))
-    P = parse(readline(f))
-    nbC = parse(readline(f))
-    p1 = parse.(split(readline(f)))
-    p2 = parse.(split(readline(f)))
-    w = parse.(split(readline(f)))
-    c = parse(readline(f))
-    @assert n == length(p1) == length(p2) == length(w)
-    problem(p1, p2, w, c)
 end
 
 end

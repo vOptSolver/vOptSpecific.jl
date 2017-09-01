@@ -1,3 +1,5 @@
+# MIT License
+# Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 type _2UMFLP
   m::Int #nbCustomers
   n::Int #nbFacilities
@@ -6,6 +8,8 @@ type _2UMFLP
   R1::Vector{Float64} #Running cost of facilities
   R2::Vector{Float64} #Running cost of facilities
 end
+
+Base.show(io::IO, id::_2UMFLP) = println("Bi-Objective Facility Location Problem with $(id.m) customers and $(id.n) facilities.")
 
 set2UMFLP(n,m,A1,A2,R1,R2) = begin
     @assert size(A1,2) == length(R1)

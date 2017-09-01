@@ -1,3 +1,5 @@
+# MIT License
+# Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 function solveWeightedSum(pb::problem, λ1::Int, λ2::Int, lb::Int=0)
     mono_p = mono_problem(pb, λ1, λ2, false)
     mono_s = solve_mono(mono_p,lb)

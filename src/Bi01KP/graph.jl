@@ -1,3 +1,5 @@
+# MIT License
+# Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 immutable graph
     pb::problem
     mono_pb::mono_problem

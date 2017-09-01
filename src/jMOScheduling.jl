@@ -1,3 +1,6 @@
+# MIT License
+# Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
+
 # ==========================================================================
 # vOpt solver
 #   Part of the open source prototype issued from the ANR-DFG research project
@@ -33,6 +36,8 @@ immutable _2OSP
   r ::Vector{Int}#vector of release dates (non-negative integer values)
   w ::Vector{Int}# vector of weights (non-negative integer values)
 end
+
+Base.show(io::IO, id::_2OSP) = print("Bi-Objective Scheduling Problem with $(id.nSize) tasks.")
 
 # ==========================================================================
 # Type of a solution for the scheduling problem presented in the paper Morita et al., 2001 (FCDS)

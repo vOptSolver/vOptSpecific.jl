@@ -1,8 +1,12 @@
+# MIT License
+# Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 type _2LAP
     nSize::Int
     C1::Matrix{Int}
     C2::Matrix{Int}
 end
+
+Base.show(io::IO, id::_2LAP) = print("Bi-Objective Linear Affectation Problem with $(id.nSize) variables.")
 
 set2LAP(n::Int, c1::Matrix{Int}, c2::Matrix{Int}) = begin
     if !(size(c1,1) == size(c1, 2) == size(c2,1) == size(c2 , 2) == n)

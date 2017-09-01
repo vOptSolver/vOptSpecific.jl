@@ -1,3 +1,5 @@
+# MIT License
+# Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 immutable solution
     pb::problem #The problem for which it's a solution
     x::BitArray #Variable states
