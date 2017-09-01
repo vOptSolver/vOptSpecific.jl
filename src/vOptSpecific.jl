@@ -16,7 +16,7 @@ export vSolve,
     load2LAP, set2LAP, LAP_Przybylski2008,
     load2OSP, set2OSP, OSP_VanWassenhove1980, generateHardInstance,
     load2UMFLP, set2UMFLP, UMFLP_Delmee2017,
-    load2UKP, set2UKP
+    load2UKP, set2UKP, UKP_Jorge2010
 
 
 __init__() = (!isfile(libLAPpath) || !isfile(libUMFLPpath)) || !isfile(libcomboPath) && Pkg.build("vOptSpecific")
