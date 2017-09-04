@@ -1,7 +1,7 @@
 # MIT License
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 immutable mono_solution
-    pb::mono_problem
+    mpb::mono_problem
     x::BitArray
     obj::Int
     weight::Int
@@ -10,8 +10,8 @@ end
 #Constructur : empty solution
 # mono_solution(p::mono_problem) = mono_solution(p, falses(size(p)), 0, 0)
 
-obj(s::mono_solution) = s.obj + s.pb.min_profit_λ
-weight(s::mono_solution) = s.weight + s.pb.ω
+obj(s::mono_solution) = s.obj + s.mpb.min_profit_λ
+weight(s::mono_solution) = s.weight + s.mpb.ω
 
 #Print function
 Base.show(io::IO, s::mono_solution) =
@@ -20,16 +20,16 @@ Base.show(io::IO, s::mono_solution) =
 #Convert a mono_solution to a solution
 solution(s::mono_solution) = begin 
     #@assert dot(s.pb.w, s.x, s.pb.variables) + s.pb.ω == weight(s)
-    p = s.pb.pb
+    p = s.mpb.pb
 
-    C1 = s.pb.C1
+    C1 = s.mpb.C1
     x = falses(size(p))
 
-    for (i,v) = enumerate(s.pb.variables)
+    for (i,v) = enumerate(s.mpb.variables)
         s.x[i] && (x[findfirst(p.variables, v)] = true)
     end
 
-    for v in s.pb.C1
+    for v in s.mpb.C1
         x[findfirst(p.variables, v)] = true
     end
 

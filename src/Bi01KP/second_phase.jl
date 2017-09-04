@@ -30,11 +30,11 @@ end
 
 #constructs the optimal path for a partition p=<v, U>
 #new partitions are added to τ if their value for zλ is >= lb
-function const_Path_New_Partition(p::Partition, τ::PartitionHeap, lb::Int)::List{Int}
+function const_Path_New_Partition(p::Partition, τ::PartitionHeap, lb::Int, mono_pb::mono_problem)::BitArray
     t = p.v #The vertex from which we're constructing the path
     U = p.arcs #The imposed arcs
     U_prime = reverse(U)
-    ϕ = List(Int) #The path that will be returned, we only need to store the variables set to 1
+    ϕ = falses(size(mono_pb)) #The path that will be returned
 
     while t.layer != 1
         if !isempty(U_prime) && last(head(U_prime)) == t #if an arc (s=>t) is imposed
@@ -46,13 +46,19 @@ function const_Path_New_Partition(p::Partition, τ::PartitionHeap, lb::Int)::Lis
             s1,s2 = parents(t)
 
             #(s => t) is the optimal arc, (s' => t) is the secondary arc, not imposed yet
-            s,s_prime = s2.zλ + zλ(s2=>t) == t.zλ ? (s2,s1) : (s1,s2)
+            if s2.zλ + zλ(s2, t, mono_pb) == t.zλ
+                s = s2
+                s_prime = s1
+            else
+                s = s1
+                s_prime = s2
+            end
 
             if isempty(U_prime) #Create a partition imposing the secondary arc (s' => t)
-                ϕ_zλ = zλ(p) - zλ(t) + zλ(s_prime) + zλ(s_prime=>t)
+                ϕ_zλ = zλ(p) - zλ(t) + zλ(s_prime) + zλ(s_prime, t, mono_pb)
                 if ϕ_zλ >= lb #Add it only if it's interesting
-                    ϕ_z1 = z1(p) - z1(t) + z1(s_prime) + z1(s_prime=>t)
-                    ϕ_z2 = z2(p) - z2(t) + z2(s_prime) + z2(s_prime=>t)
+                    ϕ_z1 = z1(p) - z1(t) + z1(s_prime) + z1(s_prime, t, mono_pb)
+                    ϕ_z2 = z2(p) - z2(t) + z2(s_prime) + z2(s_prime, t, mono_pb)
                     #@assert ϕ_zλ <= p.zλ
                     ♇ = Partition(p.v, List(s_prime=>t, U), p.nbArcs+1, ϕ_zλ, ϕ_z1, ϕ_z2 )
                     push!(τ,♇)
@@ -60,8 +66,8 @@ function const_Path_New_Partition(p::Partition, τ::PartitionHeap, lb::Int)::Lis
             end
         end
         #If the weight of the arc isn't 0 (-> if we picked the item)
-        if weight(s=>t) != 0
-            ϕ = List(s.i, ϕ) #We add s.i to the list of items picked
+        if weight(s, t) != 0
+            ϕ[s.layer] = true #We add s.i to the list of items picked
         end
         t = s
     end
@@ -78,7 +84,6 @@ in_triangle(y::Tuple{Int,Int}, Δ::Triangle) = in_triangle(y, Δ.XΔ[1], Δ.XΔ[
 
 
 function update_lb!(Δ::Triangle)
-    # sort!(Δ.XΔ, by = x -> obj_1(x), alg=QuickSort)
     # @assert issorted(Δ.XΔ, by = x -> obj_1(x))
     
     XΔ = Δ.XΔ
@@ -101,7 +106,6 @@ function update_lb!(Δ::Triangle)
 end
 
 function explore_triangle(Δ::Triangle, output::Bool)
-    #@assert length(Δ.XΔ) >= 2
     Δ.pending = false
     XΔ = Δ.XΔ
     OΔ = solution[] #Nondominated points located outside of Δ(yr, ys)
@@ -109,32 +113,34 @@ function explore_triangle(Δ::Triangle, output::Bool)
     GKP = build_graph(Δ, output)
 
     isempty(GKP) && return OΔ
+    mono_pb = GKP.mono_pb
     
     τ = binary_maxheap([Partition(v) for v in GKP.layer])
     Tk = parent_partition!(τ)
     while Tk.zλ >= Δ.lb
 
-        ϕk = const_Path_New_Partition(Tk, τ, Δ.lb)
+        ϕk = const_Path_New_Partition(Tk, τ, Δ.lb, mono_pb)
 
-        yk = Tk.z1, Tk.z2
+        let yk = (Tk.z1, Tk.z2)
 
-        if in_triangle(yk, Δ)#If the solution is in the triangle
-            if !any(x -> dominates(obj(x), yk), XΔ) #and no other solution in the triangle dominates it
-                s = solution(ϕk, GKP.pb, GKP.mono_pb) #Create the solution( O(n) )
-                deleteat!(XΔ, find(x -> s>=x, XΔ))#Delete solutions dominated by this one
+            if in_triangle(yk, Δ)#If the solution is in the triangle
+                if !any(x -> dominates(obj(x), yk), XΔ) #and no other solution in the triangle dominates it
+                    s = solution(ϕk, GKP.pb, GKP.mono_pb) #Create the solution( O(n) )
+                    deleteat!(XΔ, find(x -> s>=x, XΔ))#Delete solutions dominated by this one
 
-                #Add the solution to the list
-                indinsert = searchsortedfirst(XΔ, s, by = obj_1)
-                insert!(XΔ, indinsert, s)
+                    #Add the solution to the list
+                    indinsert = searchsortedfirst(XΔ, s, by = obj_1)
+                    insert!(XΔ, indinsert, s)
 
-                if Δ.lb != update_lb!(Δ)#And update the lower bound
-                    clean!(τ, Δ.lb) #If the lower bound has been updated, we can remove some partitions from τ
+                    if Δ.lb != update_lb!(Δ)#And update the lower bound
+                        clean!(τ, Δ.lb) #If the lower bound has been updated, we can remove some partitions from τ
+                    end
                 end
-            end
-        else
-            if !any(y -> dominates(obj(y), yk), OΔ)#If the solution isn't in the triangle and isn't dominated by any other in OΔ
-                deleteat!(OΔ, find(y -> dominates(yk, obj(y)), OΔ))#Delete solutions dominated by this one
-                push!(OΔ, solution(ϕk, GKP.pb, GKP.mono_pb))#push it in OΔ
+            else
+                if !any(y -> dominates(obj(y), yk), OΔ)#If the solution isn't in the triangle and isn't dominated by any other in OΔ
+                    deleteat!(OΔ, find(y -> dominates(yk, obj(y)), OΔ))#Delete solutions dominated by this one
+                    push!(OΔ, solution(ϕk, GKP.pb, GKP.mono_pb))#push it in OΔ
+                end
             end
         end
 

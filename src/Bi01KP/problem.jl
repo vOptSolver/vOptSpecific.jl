@@ -2,17 +2,17 @@
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 type problem
     psize::Int #Number of variables
-	p1::Vector{Int} #Objective vector 1
+    p1::Vector{Int} #Objective vector 1
     p2::Vector{Int} #Objective vector 1
-	w::Vector{Int} #Weights vector
-	c::Int #Knapsack Capacity
+    w::Vector{Int} #Weights vector
+    c::Int #Knapsack Capacity
     C0::Vector{Int} #Indices of variables always set to 0
     C1::Vector{Int} #Indices of variables always set to 1
     ω::Int #Weight of items always picked
     min_profit_1::Int #Guaranteed profit on first objective by picking the items in C1
     min_profit_2::Int #Guaranteed profit on second objective by picking the items in C1
-	eff1::Vector{Float64} #Variables efficiency wrt objective 1
-	eff2::Vector{Float64} #Variables efficiency wrt objective 2
+    eff1::Vector{Float64} #Variables efficiency wrt objective 1
+    eff2::Vector{Float64} #Variables efficiency wrt objective 2
     variables::Vector{Int} #Remaining variables of the problem after reduction
     ub_z1_i0::Vector{Int} #Upper bound on z1 for each variable i fixed to 0
     ub_z1_i1::Vector{Int} #Upper bound on z1 for each variable i fixed to 1
@@ -34,50 +34,6 @@ problem(p1, p2, w, c) = problem(length(w), p1, p2, w, c, Int[], Int[], 0, 0, 0, 
 
 size(pb::problem)::Int = length(pb.variables)
 variables(pb::problem)::Vector{Int} = pb.variables
-
-function fix_0!(pb::problem, v::Int)
-    #@assert !(v in pb.C0)
-    if v in pb.C1
-        deleteat!(pb.C1, findfirst(pb.C1, v))
-        pb.min_profit_1 -= pb.p1[v]
-        pb.min_profit_2 -= pb.p2[v]
-        pb.ω -= pb.w[v]
-    else
-        deleteat!(pb.variables, findfirst(pb.variables, v))
-    end
-    push!(pb.C0, v)
-end
-
-function fix_1!(pb::problem, v::Int)
-    #@assert !(v in pb.C1)
-    if v in pb.C0
-        deleteat!(pb.C0, findfirst(pb.C0, v))
-    else
-        deleteat!(pb.variables, findfirst(pb.variables, v))
-    end
-    pb.min_profit_1 += pb.p1[v]
-    pb.min_profit_2 += pb.p2[v]
-    pb.ω += pb.w[v]
-    push!(pb.C1, v)
-end
-
-function unfix_0!(pb::problem, v::Int)
-    #@assert v in pb.C0
-    deleteat!(pb.C0, findfirst(pb.C0, v))
-    push!(pb.variables, v)
-end
-
-
-function unfix_1!(pb::problem, v::Int)
-    #@assert v in pb.C1
-    deleteat!(pb.C1, findfirst(pb.C1, v))
-    push!(pb.variables, v)
-    pb.min_profit_1 -= pb.p1[v]
-    pb.min_profit_2 -= pb.p2[v]
-    pb.ω -= pb.w[v]
-end
-
-
 
 function reduce_problem!(pb::problem, output::Bool)
 
@@ -122,7 +78,7 @@ function reduce_problem!(pb::problem, output::Bool)
     #Compute C0 and C1 : sets of variables always set to 0 / 1 in an efficient solution
     C0 = pb.C0
     C1 = pb.C1
-
+    
     for i = 1:n
         if length(Pref[i]) >= UB
             push!(C0, i)

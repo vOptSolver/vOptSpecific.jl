@@ -48,29 +48,19 @@ function dot(v::Vector{Int}, status::BitArray, indices::AbstractArray{Int,1})
 end
 
 #Relation operators
-weakly_dominates(a1::Int,a2::Int,b1::Int,b2::Int) = a1 >= b1 && a2 >= b2
 dominates(a1::Int,a2::Int,b1::Int,b2::Int) = (a1 > b1 && a2 >= b2) || (a1 >= b1 && a2 > b2)
-strictly_dominates(a1::Int,a2::Int,b1::Int,b2::Int) = a1 > b1 && a2 > b2
-
-weakly_dominates(yr::Tuple{Int,Int}, ys::Tuple{Int,Int}) = weakly_dominates(yr[1], yr[2], ys[1], ys[2])
 dominates(yr::Tuple{Int,Int}, ys::Tuple{Int,Int}) = dominates(yr[1], yr[2], ys[1], ys[2])
-strictly_dominates(yr::Tuple{Int,Int}, ys::Tuple{Int,Int}) = strictly_dominates(yr[1], yr[2], ys[1], ys[2])
 
 ideal(yr::Tuple{Int,Int}, ys::Tuple{Int,Int}) = max(yr[1],ys[1]), max(yr[2],ys[2])
 nadir(yr::Tuple{Int,Int}, ys::Tuple{Int,Int}) = min(yr[1],ys[1]), min(yr[2],ys[2])
 
-import Base.== ; ==(a::solution, b::solution) = a.obj_1==b.obj_1 && a.obj_2==b.obj_2 && a.weight==b.weight && a.x==b.x
-
-import Base.< ; <(a::solution,b::solution) = strictly_dominates(obj(b),obj(a))
-<(a, b::solution) = strictly_dominates(obj(b), a)
-<(a::solution, b) = strictly_dominates(b, obj(a))
-
-import Base.<= ; <=(a::solution,b::solution) = dominates(obj(b),obj(a))
+import Base.==
+==(a::solution, b::solution) = a.obj_1==b.obj_1 && a.obj_2==b.obj_2 && a.weight==b.weight && a.x==b.x
+import Base.<
+import Base.<=
+<=(a::solution,b::solution) = dominates(obj(b),obj(a))
 <=(a, b::solution) = dominates(obj(b), a)
 <=(a::solution, b) = dominates(b, obj(a))
-
-≦(a::solution,b::solution) = weakly_dominates(obj(b),obj(a))
-≧(a::solution,b::solution) = b ≦ a
 
 ideal(a::solution,b::solution) = max(obj_1(a), obj_1(b)) , max(obj_2(a), obj_2(b))
 nadir(a::solution,b::solution) = nadir(obj(a), obj(b))

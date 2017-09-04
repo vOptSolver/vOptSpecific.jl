@@ -55,15 +55,18 @@ function solution(l, pb::problem, mono_pb::mono_problem)
     obj1, obj2, w = mono_pb.min_profit_1, mono_pb.min_profit_2, mono_pb.ω
 
     #TODO :
-    #variables in l should be sorted by decreasing profit of the mono_problem,
+    #variables in l are sorted by decreasing profit of the mono_problem,
     #the first pass should be doable in O(n) instead of O(n^2)
     #Variables in C1 could be sorted after the reduction to make the second pass in O(n) too
 
-    for i in l
-        vars[findfirst(pb.variables, i)] = true
-        obj1 += pb.p1[i]
-        obj2 += pb.p2[i]
-        w += pb.w[i]
+    for i = 1:length(l)
+        if l[i]
+            ind_var = mono_pb.variables[i]
+            vars[findfirst(pb.variables, ind_var)] = true
+            obj1 += pb.p1[ind_var]
+            obj2 += pb.p2[ind_var]
+            w += pb.w[ind_var]
+        end
     end
 
     for v in mono_pb.C1
@@ -77,57 +80,7 @@ function solution(l, pb::problem, mono_pb::mono_problem)
 end
 
 
-function zλ(a::Arc)
-    s = first(a)
-    t = last(a)
-    return s.w == t.w ? 0 : s.mono_pb.p[s.i]
-end
-
-function z1(a::Arc)
-    s = first(a)
-    t = last(a)
-    return s.w == t.w? 0 : s.pb.p1[s.i]
-end
-
-function z2(a::Arc)
-    s = first(a)
-    t = last(a)
-    return s.w == t.w ? 0 : s.pb.p2[s.i]
-end
-
-function weight(a::Arc)
-    s = first(a)
-    t = last(a)
-    return t.w - s.w
-end
-
-
-#For debugging
-function zλ(l::List{Arc})
-    z = zλ(first(head(l)))
-    for arc in l
-        z += zλ(arc)
-    end
-    z
-end
-
-function z1(l::List{Arc})
-    z = z1(first(head(l)))
-    for arc in l
-        z += z1(arc)
-    end
-    z
-end
-
-function z2(l::List{Arc})
-    z = z2(first(head(l)))
-    for arc in l
-        z += z2(arc)
-    end
-    z
-end
-
-
-
-# Base.show(io::IO, a::Arc) = print(io, a.first, " =>+",length(a),"=> ", a.second)
-Base.show(io::IO, a::Arc) = print(io, a.first, " =>+",length(a),",",z1(a),",",z2(a),"=> ", a.second)
+zλ(s, t, mpb) = s.w == t.w ? 0 : mpb.p[s.i]
+z1(s, t, pb) = s.w == t.w? 0 : pb.p1[s.i]
+z2(s, t, pb) = s.w == t.w ? 0 : pb.p2[s.i]
+weight(s, t) = t.w - s.w

@@ -17,7 +17,7 @@ function build_graph(Δ::Triangle, output::Bool)
     reduce!(mono_pb, Δ, output)
     size(mono_pb) == 0 && return graph(pb, mono_pb, vertex[])
     
-    s = source(pb, mono_pb)
+    s = source(mono_pb)
 
     current_layer = [s]
     for l = 1:size(mono_pb)
@@ -25,36 +25,33 @@ function build_graph(Δ::Triangle, output::Bool)
         # @assert mono_pb.variables[l] == current_layer[1].i
         # @assert l == current_layer[1].layer
 
-        # deleteat!(sortperm_z1, findfirst(sortperm_z1, mono_pb.variables[l]))
-        # deleteat!(sortperm_z2, findfirst(sortperm_z2, mono_pb.variables[l]))
-
         previous_layer = current_layer
         current_layer = vertex[]
 
         #Adds all vertices in the next layer obtained without picking the object
         for v in previous_layer
             if relax(v, mono_pb) >= Δ.lb #&& relax_z1(v, sortperm_z1) >= obj_1(xr) || relax_z2(v, sortperm_z2) >= obj_2(xs)
-                push!(current_layer, vertex_skip(v))
+                push!(current_layer, vertex_skip(v, mono_pb))
             end
         end
 
         #Adds all vertices in the next layer obtained by picking the object (if possible)
         for v in previous_layer
-            #@assert(v.layer == l)
 
-            wplus1 = v.w + pb.w[v.i] #Calculate the weight of the solution when we pick item i
-            wplus1 > mono_pb.c && continue #If the solution is too heavy for the knapsack, skip it.
-            child = vertex_keep(v) #else, create the vertex
+            let wplus1 = v.w + pb.w[v.i] #Calculate the weight of the solution when we pick item i
+                wplus1 > mono_pb.c && continue #If the solution is too heavy for the knapsack, skip it.
+                child = vertex_keep(v, mono_pb) #else, create the vertex
 
-            # Check if a node with that weight already exists so we can merge them.
-            # The nodes in the layer are sorted by their weight so we can use a dichotomic search
-            range = searchsorted(current_layer, wplus1, lt = weight_lt) # (weight_lt compares a vertex to an Integer weight)
-            if isempty(range)
-                # ∄ node with that weight, we can add it (at the right place) to the current layer
-                insert!(current_layer, range.start , child)
-            else
-                # a node with this weight already exists, we merge them
-                merge!(current_layer[range.start], child)
+                # Check if a node with that weight already exists so we can merge them.
+                # The nodes in the layer are sorted by their weight so we can use a dichotomic search
+                range = searchsorted(current_layer, wplus1, lt = weight_lt) # (weight_lt compares a vertex to an Integer weight)
+                if isempty(range)
+                    # ∄ node with that weight, we can add it (at the right place) to the current layer
+                    insert!(current_layer, range.start , child)
+                else
+                    # a node with this weight already exists, we merge them
+                    merge!(current_layer[range.start], child)
+                end
             end
         end
     end
