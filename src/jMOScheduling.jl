@@ -37,7 +37,17 @@ immutable _2OSP
   w ::Vector{Int}# vector of weights (non-negative integer values)
 end
 
-Base.show(io::IO, id::_2OSP) = print("Bi-Objective Scheduling Problem with $(id.nSize) tasks.")
+Base.show(io::IO, id::_2OSP) = begin
+    print(io, "Bi-Objective Scheduling Problem with $(id.n) tasks.")
+    print(io, "\nProcessing times : ") ; show(IOContext(io, :limit=>true), id.p)
+    print(io, "\nDue dates : ") ; show(IOContext(io, :limit=>true), id.d)
+    if any(x->x!=0, id.r)
+        print(io, "\nRelease dates : ") ; show(IOContext(io, :limit=>true), id.r)
+    end
+    if any(x->x!=1, id.w)
+        print(io, "\nWeights : ") ; show(IOContext(io, :limit=>true), id.w)
+    end
+end
 
 # ==========================================================================
 # Type of a solution for the scheduling problem presented in the paper Morita et al., 2001 (FCDS)

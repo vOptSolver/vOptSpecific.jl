@@ -26,10 +26,10 @@ function vSolve(id::_2UKP, solver::UKPsolver = UKP_Jorge2010())
     solver.solve(id)
 end
 
-function UKP_Jorge2010()::UKPsolver
+function UKP_Jorge2010(output::Bool = true)::UKPsolver
     f = (id::_2UKP) -> begin 
         pb = Bi01KP.problem(id.P1, id.P2, id.W, id.C)
-        return Bi01KP.solve(pb)
+        return Bi01KP.solve(pb, output)
     end
 
     return UKPsolver(f)
