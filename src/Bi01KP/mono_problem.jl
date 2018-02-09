@@ -1,6 +1,6 @@
 # MIT License
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
-type mono_problem
+mutable struct mono_problem
     pb::problem
     psize::Int
     p::Vector{Int} #combined profit vector

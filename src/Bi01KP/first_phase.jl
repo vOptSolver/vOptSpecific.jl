@@ -33,7 +33,7 @@ function first_phase(pb::problem)
 
     solveRecursion(xr, xs, X)
 
-    sort!(X, by = obj, lt = lexless, alg=QuickSort)
+    sort!(X, by = obj, lt = isless, alg=QuickSort)
 
     del_inds = Int[]
     for i = 1:length(X)-1

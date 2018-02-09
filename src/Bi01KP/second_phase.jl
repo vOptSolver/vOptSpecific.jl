@@ -1,6 +1,6 @@
 # MIT License
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
-type Triangle
+mutable struct Triangle
     xr::solution
     xs::solution
     XΔ::Vector{solution}
@@ -23,7 +23,7 @@ function parent_partition!(τ::PartitionHeap)
 end
 
 function clean!(τ::PartitionHeap, lb::Int)
-    deleteat!(τ.valtree, find(elt -> elt.zλ < lb, τ.valtree))
+    deleteat!(τ.valtree, findall(elt -> elt.zλ < lb, τ.valtree))
     heapify!(τ.valtree, Base.Order.Reverse)
     # @assert all(top(τ).zλ .>= zλ.(τ.valtree[2:end]))
 end
@@ -126,7 +126,7 @@ function explore_triangle(Δ::Triangle, output::Bool)
             if in_triangle(yk, Δ)#If the solution is in the triangle
                 if !any(x -> dominates(obj(x), yk), XΔ) #and no other solution in the triangle dominates it
                     s = solution(ϕk, GKP.pb, GKP.mono_pb) #Create the solution( O(n) )
-                    deleteat!(XΔ, find(x -> s>=x, XΔ))#Delete solutions dominated by this one
+                    deleteat!(XΔ, findall(x -> s>=x, XΔ))#Delete solutions dominated by this one
 
                     #Add the solution to the list
                     indinsert = searchsortedfirst(XΔ, s, by = obj_1)
@@ -138,7 +138,7 @@ function explore_triangle(Δ::Triangle, output::Bool)
                 end
             else
                 if !any(y -> dominates(obj(y), yk), OΔ)#If the solution isn't in the triangle and isn't dominated by any other in OΔ
-                    deleteat!(OΔ, find(y -> dominates(yk, obj(y)), OΔ))#Delete solutions dominated by this one
+                    deleteat!(OΔ, findall(y -> dominates(yk, obj(y)), OΔ))#Delete solutions dominated by this one
                     push!(OΔ, solution(ϕk, GKP.pb, GKP.mono_pb))#push it in OΔ
                 end
             end
@@ -173,7 +173,7 @@ function second_phase(XSE::Vector{solution}, output::Bool)
                         !(Δj.pending) && break
                         any(x -> x>=sol, Δj.XΔ) && break
 
-                        deleteat!(Δj.XΔ, find(x -> sol>=x, Δj.XΔ))
+                        deleteat!(Δj.XΔ, findall(x -> sol>=x, Δj.XΔ))
 
                         indinsert = searchsortedfirst(Δj.XΔ, sol, by = obj_1)
                         insert!(Δj.XΔ, indinsert, sol)
@@ -193,7 +193,7 @@ end
 function select_triangle(Δlist::Vector{Triangle})
     res = Δlist[findfirst(x->x.pending, Δlist)]
     val_min = res.ub - res.lb
-    for i in find(x -> x.pending, Δlist)
+    for i in findall(x -> x.pending, Δlist)
         val = Δlist[i].ub - Δlist[i].lb
         if val < val_min
             val_min = val

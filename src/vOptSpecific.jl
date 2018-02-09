@@ -12,6 +12,11 @@ include("jMOScheduling.jl")
 include("Bi01KP/Bi01KP.jl")
 include("KP.jl")
 
+@static if VERSION > v"0.7-"
+	using DelimitedFiles
+	using SparseArrays
+end
+
 export vSolve,
     load2LAP, set2LAP, LAP_Przybylski2008,
     load2OSP, set2OSP, OSP_VanWassenhove1980, generateHardInstance,

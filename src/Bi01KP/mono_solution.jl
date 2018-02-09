@@ -1,6 +1,6 @@
 # MIT License
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
-immutable mono_solution
+struct mono_solution
     mpb::mono_problem
     x::BitArray
     obj::Int
@@ -26,11 +26,11 @@ solution(s::mono_solution) = begin
     x = falses(size(p))
 
     for (i,v) = enumerate(s.mpb.variables)
-        s.x[i] && (x[findfirst(p.variables, v)] = true)
+        s.x[i] && (x[findfirst(equalto(v), p.variables)] = true)
     end
 
     for v in s.mpb.C1
-        x[findfirst(p.variables, v)] = true
+        x[findfirst(equalto(v), p.variables)] = true
     end
 
     res = solution(

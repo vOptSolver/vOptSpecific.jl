@@ -1,6 +1,6 @@
 # MIT License
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
-type vertex
+mutable struct vertex
     layer::Int #index of the layer in the graph
     i::Int  #index of the variable
     w::Int  #accumulated weight
@@ -47,11 +47,8 @@ end
 
 #merge two vertices
 function merge!(a::vertex, b::vertex)
-
     if b.zλ >= a.zλ
-        a.zλ = b.zλ
-        a.z1 = b.z1
-        a.z2 = b.z2
+        a.zλ, a.z1, a.z2 = b.zλ, b.z1, b.z2
     end
     a.has_parent_1 = true
     a.parent_1 = b.parent_1
