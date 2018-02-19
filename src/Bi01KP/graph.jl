@@ -1,6 +1,6 @@
 # MIT License
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
-immutable graph
+struct graph
     pb::problem
     mono_pb::mono_problem
     layer::Vector{vertex} #last layer of the graph

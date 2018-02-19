@@ -1,8 +1,9 @@
+
 # MIT License
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 const Arc = Pair{vertex,vertex}
 
-immutable List{T}
+struct List{T}
    head::T
    tail::List{T}
 
@@ -30,7 +31,7 @@ function reverse(l::List{T}) where T
     l2
 end
 
-immutable Partition
+struct Partition
     v::vertex
     arcs::List{Arc}
     nbArcs::UInt16
@@ -62,7 +63,7 @@ function solution(l, pb::problem, mono_pb::mono_problem)
     for i = 1:length(l)
         if l[i]
             ind_var = mono_pb.variables[i]
-            vars[findfirst(pb.variables, ind_var)] = true
+            vars[findfirst(equalto(ind_var), pb.variables)] = true
             obj1 += pb.p1[ind_var]
             obj2 += pb.p2[ind_var]
             w += pb.w[ind_var]
@@ -70,7 +71,7 @@ function solution(l, pb::problem, mono_pb::mono_problem)
     end
 
     for v in mono_pb.C1
-        vars[findfirst(pb.variables, v)] = true
+        vars[findfirst(equalto(v), pb.variables)] = true
     end
 
     res = solution(pb, vars, obj1 - pb.min_profit_1, obj2 - pb.min_profit_2, w - pb.ω)
@@ -81,6 +82,6 @@ end
 
 
 zλ(s, t, mpb) = s.w == t.w ? 0 : mpb.p[s.i]
-z1(s, t, pb) = s.w == t.w? 0 : pb.p1[s.i]
+z1(s, t, pb) = s.w == t.w ? 0 : pb.p1[s.i]
 z2(s, t, pb) = s.w == t.w ? 0 : pb.p2[s.i]
 weight(s, t) = t.w - s.w

@@ -1,6 +1,6 @@
 # MIT License
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
-type problem
+mutable struct problem
     psize::Int #Number of variables
     p1::Vector{Int} #Objective vector 1
     p2::Vector{Int} #Objective vector 1

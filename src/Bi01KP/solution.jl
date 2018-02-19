@@ -1,6 +1,6 @@
 # MIT License
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
-immutable solution
+struct solution
     pb::problem #The problem for which it's a solution
     x::BitArray #Variable states
     obj_1::Int #Value on first objective
@@ -30,7 +30,7 @@ full_variable_vector(s::solution) = begin
     return res
 end
 
-print_vars(s::solution) = String([i==1?'1':'0' for i in full_variable_vector(s)])
+print_vars(s::solution) = String([i==1 ? '1' : '0' for i in full_variable_vector(s)])
 
 #Print function
 Base.show(io::IO, s::solution) =

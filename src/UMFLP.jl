@@ -1,6 +1,6 @@
 # MIT License
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
-type _2UMFLP
+struct _2UMFLP
   m::Int #nbCustomers
   n::Int #nbFacilities
   A1::Matrix{Float64} #Assignment costs of clients to facilities
@@ -19,11 +19,9 @@ set2UMFLP(m,n,A1,A2,R1,R2) = begin
 end
 set2UMFLP(A1,A2,R1,R2) = set2UMFLP(size(A1,1), size(A1,2), A1, A2, R1, R2)
 
-type UMFLPsolver
+struct UMFLPsolver
     solve::Function
 end
-
-
 
 function vSolve(id::_2UMFLP, solver::UMFLPsolver = UMFLP_Delmee2017())
     solver.solve(id)
@@ -45,7 +43,7 @@ end
 function UMFLP_Delmee2017(; modeVerbose = false, modeUpperBound = true, modeLowerBound = true, modeImprovedLB = false, modeParam = true)::UMFLPsolver
     f = (id::_2UMFLP) -> begin 
         n, m = id.n, id.m  #n facilities, m customers
-        A1, A2 = reshape(id.A1', Val{1}), reshape(id.A2', Val{1})
+        A1, A2 = vec(permutedims(id.A1, [2,1])), vec(permutedims(id.A2, [2,1]))
         R1, R2 = id.R1, id.R2
         p_z1,p_z2 = Ref{Ptr{Cdouble}}() ,Ref{Ptr{Cdouble}}()
         p_facility, p_isEdge, p_isExtremityDominated = Ref{Ptr{Cuchar}}(), Ref{Ptr{Cuchar}}(), Ref{Ptr{Cuchar}}()
@@ -89,7 +87,7 @@ function UMFLP_Delmee2017(; modeVerbose = false, modeUpperBound = true, modeLowe
             ind += nbAlloc[i]
             push!(X, sm)
         end
-        return z1, z2, facility_res, X, isEdge
+        return z1, z2, facility_res, X, isEdge, isExtremityDominated
     end
 
     return UMFLPsolver(f)
