@@ -63,7 +63,7 @@ function solution(l, pb::problem, mono_pb::mono_problem)
     for i = 1:length(l)
         if l[i]
             ind_var = mono_pb.variables[i]
-            vars[findfirst(equalto(ind_var), pb.variables)] = true
+            vars[findfirst(isequal(ind_var), pb.variables)] = true
             obj1 += pb.p1[ind_var]
             obj2 += pb.p2[ind_var]
             w += pb.w[ind_var]
@@ -71,7 +71,7 @@ function solution(l, pb::problem, mono_pb::mono_problem)
     end
 
     for v in mono_pb.C1
-        vars[findfirst(equalto(v), pb.variables)] = true
+        vars[findfirst(isequal(v), pb.variables)] = true
     end
 
     res = solution(pb, vars, obj1 - pb.min_profit_1, obj2 - pb.min_profit_2, w - pb.ω)

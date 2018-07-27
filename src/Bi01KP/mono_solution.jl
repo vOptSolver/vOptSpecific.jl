@@ -26,11 +26,11 @@ solution(s::mono_solution) = begin
     x = falses(size(p))
 
     for (i,v) = enumerate(s.mpb.variables)
-        s.x[i] && (x[findfirst(equalto(v), p.variables)] = true)
+        s.x[i] && (x[findfirst(isequal(v), p.variables)] = true)
     end
 
     for v in s.mpb.C1
-        x[findfirst(equalto(v), p.variables)] = true
+        x[findfirst(isequal(v), p.variables)] = true
     end
 
     res = solution(

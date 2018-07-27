@@ -24,6 +24,6 @@ export vSolve,
     load2UKP, set2UKP, UKP_Jorge2010
 
 
-__init__() = (!isfile(libLAPpath) || !isfile(libUMFLPpath)) || !isfile(libcomboPath) && Pkg.build("vOptSpecific")
+__init__() = (!isfile(libLAPpath) || !isfile(libUMFLPpath)) || !isfile(libcomboPath) && warn("""Some libraries are missing, run Pkg.build("vOptSpecific")""")
 
 end # module

@@ -63,20 +63,20 @@ function UMFLP_Delmee2017(; modeVerbose = false, modeUpperBound = true, modeLowe
                        p_z1, p_z2,
                        p_facility, p_isEdge, p_isExtremityDominated,
                        p_nbAlloc, p_customerAlloc, p_correspondingFac, p_percentageAlloc)
-        z1 = unsafe_wrap(Array, p_z1.x, nbSol, true)
-        z2 = unsafe_wrap(Array, p_z2.x, nbSol, true)
+        z1 = unsafe_wrap(Array, p_z1.x, nbSol, own=true)
+        z2 = unsafe_wrap(Array, p_z2.x, nbSol, own= true)
 
-        facility = convert(BitArray, unsafe_wrap(Array, p_facility.x, nbSol*n, true))
+        facility = convert(BitArray, unsafe_wrap(Array, p_facility.x, nbSol*n, own=true))
         facility_res = [facility[i:i+n-1] for i = 1:n:nbSol*n]
-        isEdge = convert(BitArray, unsafe_wrap(Array, p_isEdge.x, nbSol, true))
-        isExtremityDominated = convert(BitArray, unsafe_wrap(Array, p_isExtremityDominated.x, nbSol, true))
-        nbAlloc = unsafe_wrap(Array, p_nbAlloc.x, nbSol, true)
+        isEdge = convert(BitArray, unsafe_wrap(Array, p_isEdge.x, nbSol, own=true))
+        isExtremityDominated = convert(BitArray, unsafe_wrap(Array, p_isExtremityDominated.x, nbSol, own=true))
+        nbAlloc = unsafe_wrap(Array, p_nbAlloc.x, nbSol, own=true)
 
         totalAlloc = sum(nbAlloc)
 
-        customerAlloc = 1 .+ unsafe_wrap(Array, p_customerAlloc.x, totalAlloc, true)
-        correspondingFac = 1 .+ unsafe_wrap(Array,  p_correspondingFac.x, totalAlloc, true)
-        percentageAlloc = unsafe_wrap(Array,  p_percentageAlloc.x, totalAlloc, true)
+        customerAlloc = 1 .+ unsafe_wrap(Array, p_customerAlloc.x, totalAlloc, own=true)
+        correspondingFac = 1 .+ unsafe_wrap(Array,  p_correspondingFac.x, totalAlloc, own=true)
+        percentageAlloc = unsafe_wrap(Array,  p_percentageAlloc.x, totalAlloc, own=true)
 
         ind = 1
 
