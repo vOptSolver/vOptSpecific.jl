@@ -33,7 +33,7 @@ Before your first local or distant use,
 2. add as follow the two mandatory packages to your Julia distribution: 
 
 ```
-julia> Pkg.clone("http://github.com/vOptSolver/vOptSpecific.jl")
+julia> Pkg.add("vOptSpecific.jl")
 julia> Pkg.build("vOptSpecific")
 ```
 
