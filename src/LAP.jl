@@ -35,8 +35,8 @@ function LAP_Przybylski2008()::LAPsolver
             (Ref{Cint},Ref{Cint}, Cint, Ref{Ptr{Cint}}, Ref{Ptr{Cint}}, Ref{Ptr{Cint}}, Ref{Cint}),
             C1, C2, nSize, p_z1, p_z2, p_solutions, p_nbsolutions)
         nbSol = p_nbsolutions.x
-        z1,z2 = convert(Array{Int,1},unsafe_wrap(Array, p_z1.x, nbSol, own=true)), convert(Array{Int,1},unsafe_wrap(Array, p_z2.x, nbSol, own=true))
-        solutions = convert(Array{Int,2},reshape(unsafe_wrap(Array, p_solutions.x, nbSol*id.nSize, own=true), (id.nSize, nbSol)))
+        z1,z2 = convert(Array{Int,1},_unsafe_wrap(Array, p_z1.x, nbSol, own=true)), convert(Array{Int,1},_unsafe_wrap(Array, p_z2.x, nbSol, own=true))
+        solutions = convert(Array{Int,2},reshape(_unsafe_wrap(Array, p_solutions.x, nbSol*id.nSize, own=true), (id.nSize, nbSol)))
         return z1, z2, permutedims(solutions, [2,1]).+1
     end
 

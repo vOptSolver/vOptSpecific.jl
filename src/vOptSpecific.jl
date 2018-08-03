@@ -17,6 +17,11 @@ include("KP.jl")
 @static if VERSION > v"0.7-"
 	using DelimitedFiles
 	using SparseArrays
+	_unsafe_wrap(Atype, p, dims ; own=false) = unsafe_wrap(Atype, p, dims, own=own)
+end
+
+@static if VERSION < v"0.7-"
+	_unsafe_wrap(Atype, p, dims ; own=false) = unsafe_wrap(Atype, p, dims, own)
 end
 
 export vSolve,
