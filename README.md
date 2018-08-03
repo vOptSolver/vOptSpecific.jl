@@ -30,7 +30,7 @@ On macOS:
 
 Before your first local or distant use, 
 1. run Julia and when the terminal is ready with the prompt `julia` on screen, 
-2. add as follow the two mandatory packages to your Julia distribution: 
+2. add and build as follow the mandatory package to your Julia distribution: 
 
 ```
 julia> Pkg.add("vOptSpecific.jl")
