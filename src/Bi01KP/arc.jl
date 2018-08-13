@@ -19,15 +19,18 @@ Base.isempty(x::List) = !isdefined(x,2)
 head(a::List) = a.head
 tail(a::List) = a.tail
 
-
-function Base.iterate(l::List, state::List = l)
-	isempty(state) && return nothing
-    state.head, state.tail
+@static if VERSION > v"0.7-"
+	function Base.iterate(l::List, state::List = l)
+		isempty(state) && return nothing
+	    state.head, state.tail
+	end
 end
 
-Base.start(l::List) = l
-Base.done(l::List, state::List) = isempty(state)
-Base.next(l::List, state::List) = (state.head, state.tail)
+@static if VERSION < v"0.7-"
+	Base.start(l::List) = l
+	Base.done(l::List, state::List) = isempty(state)
+	Base.next(l::List, state::List) = (state.head, state.tail)
+end
 
 function reverse(l::List{T}) where T
     l2 = List(T)
