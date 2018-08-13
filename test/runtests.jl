@@ -1,6 +1,9 @@
 using vOptSpecific
-using Test
-
+@static if VERSION > v"0.7-"
+	using Test
+else
+	using Base.Test
+end
 println("Testing 2LAP...")
 C1 = [3 9 0 0 6 10 7 5 16 11 ;
 16 0 6 12 19 8 17 10 9 18 ;

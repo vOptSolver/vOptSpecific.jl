@@ -226,7 +226,12 @@ function computeExactFlowtimeMaxTardiness(env::t_environment, data::_2OSP)::Vect
 	# Trie des taches par ordre lexicographique
 	# sur leur processing time puis leur due date
 	I = [data.p data.d 1:data.n]
-	I = sortslices(I, dims=1)
+	
+	I = @static if VERSION > v"0.7-"
+			sortslices(I, dims=1)
+		else
+			sortrows(I)
+		end
 
 	# --------------------------------------------------------------------------
 	# Initialisation de R avec la somme des processing time
