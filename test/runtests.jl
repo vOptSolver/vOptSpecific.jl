@@ -1,5 +1,5 @@
 using vOptSpecific
-using Base.Test
+using Test
 
 println("Testing 2LAP...")
 C1 = [3 9 0 0 6 10 7 5 16 11 ;
@@ -57,7 +57,7 @@ println("\nTesting 2UMFLP...")
 id = load2UMFLP("../examples/F50-51.txt")
 z1, z2, facility_res, X, isEdge = vSolve(id)
 @test length(z1) == 198
-@test countnz(X[21]) == 91
+@test count(!iszero, X[21]) == 91
 @test count(isEdge) == 188
 
 

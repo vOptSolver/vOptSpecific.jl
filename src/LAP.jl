@@ -49,10 +49,10 @@ function load2LAP(fname::AbstractString)
     C1 = zeros(Int,n,n)
     C2 = zeros(Int,n,n)
     for i = 1:n
-        C1[i,:] = parse.(Int, split(chomp(readline(f)), ' ', keep=false))
+        C1[i,:] = parse.(Int, split(chomp(readline(f)), ' ', keepempty=false))
     end
     for i=1:n
-        C2[i,:] = parse.(Int, split(chomp(readline(f)), ' ', keep=false))
+        C2[i,:] = parse.(Int, split(chomp(readline(f)), ' ', keepempty=false))
     end
     return _2LAP(n, C1, C2)
 end
