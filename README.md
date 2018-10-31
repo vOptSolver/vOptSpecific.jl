@@ -4,7 +4,7 @@
 [![codecov.io](http://codecov.io/github/vOptSolver/vOptSpecific.jl/coverage.svg?branch=master)](http://codecov.io/github/vOptSolver/vOptSpecific.jl?branch=master)
 
 **vOptSolver** is a solver of multiobjective linear optimization problems (MOCO, MOIP, MOMILP, MOLP).
-This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP). With vOptSpecific, the problem is expressed using an Application Programming Interface. vOptSpecific runs on macOS, and linux-ubuntu (local use), also on JuliaBox (distant use).
+This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP, 2OSP, 2UKP, 2UMFLP). With vOptSpecific, the problem is expressed using an Application Programming Interface. vOptSpecific runs on macOS, and linux-ubuntu (local use), also on JuliaBox (distant use).
 
 We suppose you are familiar with vOptSolver; if not, read first this [presentation](https://voptsolver.github.io/vOptSolver/).
 
@@ -33,6 +33,7 @@ Before your first local or distant use,
 2. add and build as follow the mandatory package to your Julia distribution: 
 
 ```
+julia> using Pkg
 julia> Pkg.add("vOptSpecific.jl")
 julia> Pkg.build("vOptSpecific")
 ```
@@ -50,6 +51,14 @@ julia> using vOptSpecific
 ```
 vOptSpecific is ready. See examples for further informations and have fun with the solver!
 
+## Problems available:
+
+| Problem | Description                        | API           | src      | Reference      |
+|:--------|:-----------------------------------|:-------------:| --------:| --------------:|
+| LAP     | Linear Assignment Problem          | **2LAP2008**  | C        | Przybylski2008 |
+| OSP     | One machine Scheduling Problem     | **2OSP1980**  | Julia    | Wassenhove1980 |
+| UKP     | 01 Unidimensional knapsack problem | **2UKP2010**  | Julia    | Jorge2010 |
+| UMFLP   | Uncapacitated Mixed variables Facility Location Problem |**2UMFLP2016**| C++ | Delmee2017|
 
 ## Examples 
 The folder `examples` provides (1) source code of problems ready to be solved and (2) selected datafiles into different formats.
