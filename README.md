@@ -34,7 +34,7 @@ Before your first local or distant use,
 
 ```
 julia> using Pkg
-julia> Pkg.add("vOptSpecific.jl")
+julia> Pkg.add("vOptSpecific")
 julia> Pkg.build("vOptSpecific")
 ```
 
