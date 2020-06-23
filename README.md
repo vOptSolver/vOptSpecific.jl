@@ -3,20 +3,20 @@
 [![Build Status](https://travis-ci.org/vOptSolver/vOptSpecific.jl.svg?branch=master)](https://travis-ci.org/vOptSolver/vOptSpecific.jl)
 [![codecov.io](http://codecov.io/github/vOptSolver/vOptSpecific.jl/coverage.svg?branch=master)](http://codecov.io/github/vOptSolver/vOptSpecific.jl?branch=master)
 
-**vOptSolver** is a solver of multiobjective linear optimization problems (MOCO, MOIP, MOMILP, MOLP).
-This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP, 2OSP, 2UKP, 2UMFLP). With vOptSpecific, the problem is expressed using an Application Programming Interface. vOptSpecific runs on macOS, and linux-ubuntu (local use), also on JuliaBox (distant use).
+**vOptSolver** is a solver of multiobjective linear optimization problems (MOMILP, MOLP, MOIP, MOCO).
+This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP, 2OSP, 2UKP, 2UMFLP). With vOptSpecific, the problem is expressed using an Application Programming Interface. vOptSpecific runs on macOS, and linux-ubuntu.
 
 We suppose you are familiar with vOptSolver; if not, read first this [presentation](https://voptsolver.github.io/vOptSolver/).
 
 
 ## Instructions 
-For a local use, a working version of:
+For an use, a working version of:
 - Julia must be ready; instructions for the installation are available [here](https://julialang.org/downloads/)
 - your favorite C/C++ compiler must be ready (GCC is suggested)
 
 ### Run Julia
 
-On linux or in the cloud (juliaBox):
+On linux:
 
 - open a console on your computer or in the cloud
 - when the prompt is ready, type in the console `julia`
@@ -28,7 +28,7 @@ On macOS:
 
 ### Installation Instructions
 
-Before your first local or distant use, 
+Before your first use, 
 1. run Julia and when the terminal is ready with the prompt `julia` on screen, 
 2. add and build as follow the mandatory package to your Julia distribution: 
 
