@@ -4,7 +4,7 @@
 [![codecov.io](http://codecov.io/github/vOptSolver/vOptSpecific.jl/coverage.svg?branch=master)](http://codecov.io/github/vOptSolver/vOptSpecific.jl?branch=master)
 
 **vOptSolver** is a solver of multiobjective linear optimization problems (MOMIP, MOLP, MOIP, MOCO).
-This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP, 2OSP, 2UKP, 2UMFLP). With vOptSpecific, the problem is expressed using an Application Programming Interface. vOptSpecific runs on macOS, and linux-ubuntu.
+This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP, 2OSP, 2UKP, 2UMFLP). With vOptSpecific, the problem is expressed using an Application Programming Interface. vOptSpecific runs on macOS (and soon linux-ubuntu).
 
 We suppose you are familiar with vOptSolver; if not, read first this [presentation](https://voptsolver.github.io/vOptSolver/).
 
@@ -16,15 +16,15 @@ For an use, a working version of:
 
 ### Run Julia
 
-On linux:
-
-- open a console on your computer or in the cloud
-- when the prompt is ready, type in the console `julia`
-
 On macOS:
 
 - locate the application `julia` and 
 - click on the icon, the julia console comes to the screen
+
+On linux:
+
+- open a console on your computer or in the cloud
+- when the prompt is ready, type in the console `julia`
 
 ### Installation Instructions
 
@@ -65,3 +65,19 @@ The folder `examples` provides (1) source code of problems ready to be solved an
 
 ## Limitations
 - The problem size for 2LAP is limited to 100x100.
+
+## Validation 
+
+Tested the
+
+-    22-Jul-2021 
+
+with
+
+  -    Julia 1.6.2
+ 
+on
+
+  -    macOS 11.4 (Big Sur)
+  -    (Linux ubuntu 18.04.5 LTS soon, working on it)
+
