@@ -117,7 +117,8 @@ function explore_triangle(Δ::Triangle, output::Bool)
     isempty(GKP) && return OΔ
     mono_pb = GKP.mono_pb
     
-    τ = binary_maxheap([Partition(v) for v in GKP.layer])
+#    τ = binary_maxheap([Partition(v) for v in GKP.layer]) # updated 23-07-2021
+    τ = BinaryMaxHeap([Partition(v) for v in GKP.layer])
     Tk = parent_partition!(τ)
     while Tk.zλ >= Δ.lb
 
