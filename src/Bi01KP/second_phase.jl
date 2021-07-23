@@ -15,7 +15,8 @@ Triangle(xr::solution,xs::solution) = begin
     Triangle(xr,xs,solution[xr,xs],(λ1,λ2),λ1*obj_1(xr) + λ2*obj_2(xr),λ1*obj_1(xr) + λ2*obj_2(xs), true)
 end
 
-const PartitionHeap = BinaryHeap{Partition, DataStructures.GreaterThan}
+#const PartitionHeap = BinaryHeap{Partition, DataStructures.GreaterThan} #updated 22-07-2021
+const PartitionHeap = BinaryHeap{Partition, DataStructures}
 
 #Returns the partition p in τ maximizing p.zλ
 function parent_partition!(τ::PartitionHeap)
@@ -115,7 +116,8 @@ function explore_triangle(Δ::Triangle, output::Bool)
     isempty(GKP) && return OΔ
     mono_pb = GKP.mono_pb
     
-    τ = binary_maxheap([Partition(v) for v in GKP.layer])
+#    τ = binary_maxheap([Partition(v) for v in GKP.layer]) # updated 23-07-2021
+    τ = BinaryMaxHeap([Partition(v) for v in GKP.layer])
     Tk = parent_partition!(τ)
     while Tk.zλ >= Δ.lb
 
