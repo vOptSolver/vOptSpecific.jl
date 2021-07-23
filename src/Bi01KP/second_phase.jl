@@ -15,7 +15,8 @@ Triangle(xr::solution,xs::solution) = begin
     Triangle(xr,xs,solution[xr,xs],(λ1,λ2),λ1*obj_1(xr) + λ2*obj_2(xr),λ1*obj_1(xr) + λ2*obj_2(xs), true)
 end
 
-#const PartitionHeap = BinaryHeap{Partition, DataStructures.GreaterThan} #updated 22-07-2021
+
+#const PartitionHeap = BinaryHeap{Partition, DataStructures.GreaterThan} # update 22-07-2021
 const PartitionHeap = BinaryHeap{Partition, DataStructures}
 
 #Returns the partition p in τ maximizing p.zλ
