@@ -9,7 +9,7 @@ This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **m
 We suppose you are familiar with vOptSolver; if not, read first this [presentation](https://voptsolver.github.io/vOptSolver/).
 
 ## !!! Warning !!! 
-vOptSpecific is calling C/C++ codes through julia' wrappers. The warning. vOptSpecific calls C/C++ code through julia wrappers. Compilation, configuration, and installation are done automatically when the package is added to your own julia environment. These steps require none action from the user. However, some issues with the C/C++ compilation scripts on the latest versions of macOS and Linux have been reported to us recently. You may have to manually compile codes with commands set in the scripts and install the resulting shared libraries in the ad hoc folders for executing vOptSpecific. Sorry for these inconveniences, we will examine and fix this soon.
+vOptSpecific calls C/C++ code through julia wrappers. Compilation, configuration, and installation are done automatically when the package is added to your own julia environment. These steps require none action from the user. However, some issues with the C/C++ compilation scripts on the latest versions of macOS and Linux have been reported to us recently. You may have to manually compile codes with commands set in the scripts and install the resulting shared libraries in the ad hoc folders for executing vOptSpecific. Sorry for these inconveniences, we will examine and fix this soon.
 
 ## Instructions 
 For an use, a working version of:
