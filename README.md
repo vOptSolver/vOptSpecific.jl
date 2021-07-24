@@ -4,10 +4,12 @@
 [![codecov.io](http://codecov.io/github/vOptSolver/vOptSpecific.jl/coverage.svg?branch=master)](http://codecov.io/github/vOptSolver/vOptSpecific.jl?branch=master)
 
 **vOptSolver** is a solver of multiobjective linear optimization problems (MOMIP, MOLP, MOIP, MOCO).
-This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP, 2OSP, 2UKP, 2UMFLP). With vOptSpecific, the problem is expressed using an Application Programming Interface. vOptSpecific runs on macOS (and soon linux-ubuntu).
+This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP, 2OSP, 2UKP, 2UMFLP). With vOptSpecific, the problem is expressed using an Application Programming Interface. vOptSpecific runs on macOS, and linux-ubuntu.
 
 We suppose you are familiar with vOptSolver; if not, read first this [presentation](https://voptsolver.github.io/vOptSolver/).
 
+## !!! Warning !!! 
+vOptSpecific is calling C/C++ codes through julia' wrappers. The warning. vOptSpecific calls C/C++ code through julia wrappers. Compilation, configuration, and installation are done automatically when the package is added to your own julia environment. These steps require none action from the user. However, some issues with the C/C++ compilation scripts on the latest versions of macOS and Linux have been reported to us recently. You may have to manually compile codes with commands set in the scripts and install the resulting shared libraries in the ad hoc folders for executing vOptSpecific. Sorry for these inconveniences, we will examine and fix this soon.
 
 ## Instructions 
 For an use, a working version of:
@@ -57,7 +59,7 @@ vOptSpecific is ready. See examples for further informations and have fun with t
 |:--------|:-----------------------------------|:-------------:| --------:| --------------:|
 | LAP     | Linear Assignment Problem          | **2LAP2008**  | C        | Przybylski2008 |
 | OSP     | One machine Scheduling Problem     | **2OSP1980**  | Julia    | Wassenhove1980 |
-| UKP     | 01 Unidimensional knapsack problem | **2UKP2010**  | Julia    | Jorge2010 |
+| UKP     | 01 Unidimensional knapsack problem | **2UKP2010**  | Julia + C  | Jorge2010 |
 | UMFLP   | Uncapacitated Mixed variables Facility Location Problem |**2UMFLP2016**| C++ | Delmee2017|
 
 ## Examples 
@@ -79,5 +81,5 @@ with
 on
 
   -    macOS 11.4 (Big Sur)
-  -    (Linux ubuntu 18.04.5 LTS soon, working on it)
+  -    Linux ubuntu 18.04.5 LTS
 
