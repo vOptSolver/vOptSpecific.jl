@@ -2,7 +2,7 @@
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 module Bi01KP
 
-using DataStructures, Compat
+using DataStructures
 
 include("problem.jl") #Defines problems and reduce_problem!()
 include("mono_problem.jl") #Defines mono_problems

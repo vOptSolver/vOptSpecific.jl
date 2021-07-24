@@ -2,8 +2,6 @@
 # Copyright (c) 2017: Xavier Gandibleux, Anthony Przybylski, Gauthier Soleilhac, and contributors.
 module vOptSpecific
 
-using Compat
-
 const libLAPpath = joinpath(@__DIR__, "..", "deps", "libLAP.so")
 const libUMFLPpath = joinpath(@__DIR__, "..", "deps", "libUMFLP.so")
 const libcomboPath = joinpath(@__DIR__,"..","deps","libcombo.so")
