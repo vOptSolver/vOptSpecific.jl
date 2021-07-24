@@ -17,7 +17,7 @@ end
 
 
 #const PartitionHeap = BinaryHeap{Partition, DataStructures.GreaterThan} # update 22-07-2021
-const PartitionHeap = BinaryHeap{Partition, DataStructures}
+const PartitionHeap = BinaryMaxHeap{Partition}
 
 #Returns the partition p in τ maximizing p.zλ
 function parent_partition!(τ::PartitionHeap)
