@@ -4,12 +4,14 @@
 [![codecov.io](http://codecov.io/github/vOptSolver/vOptSpecific.jl/coverage.svg?branch=master)](http://codecov.io/github/vOptSolver/vOptSpecific.jl?branch=master)
 
 **vOptSolver** is a solver of multiobjective linear optimization problems (MOMIP, MOLP, MOIP, MOCO).
-This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP, 2OSP, 2UKP, 2UMFLP). With vOptSpecific, the problem is expressed using an Application Programming Interface. vOptSpecific runs on macOS, and linux-ubuntu.
+This repository concerns **vOptSpecific**, the part of vOptSolver devoted to **multiobjective structured problems** (currently available: 2LAP, 2OSP, 2UKP, 2UMFLP). With vOptSpecific, the problem is expressed using an Application Programming Interface. vOptSpecific runs on macOS (a C/C++ compiler has to be available on your computer), and linux-ubuntu.
+
+This package is not provided to be installed on Windows. If you want use vOptSpecific on Windows, a C/C++ compiler has to be available on your computer, you have to compile manually the C/C++ codes as shared libraries, and to install the resulting files in the ad-hoc folder.
 
 We suppose you are familiar with vOptSolver; if not, read first this [presentation](https://voptsolver.github.io/vOptSolver/).
 
-## !!! Warning !!! 
-vOptSpecific calls C/C++ codes through julia wrappers. Compilation, configuration, and installation are done automatically when the package is added to your own julia environment. These steps require none action from the user. However, some issues with the C/C++ compilation scripts on the latest versions of macOS and Linux have been reported to us recently. You may have to manually compile codes with commands set in the scripts and install the resulting shared libraries in the ad hoc folders for executing vOptSpecific. Sorry for these inconveniences, we will examine and fix this soon.
+###  Note 
+vOptSpecific calls C/C++ codes through julia wrappers. Compilation, configuration, and installation are done automatically when the package is added to your own julia environment. These steps require none action from the user. However, some issues with the C/C++ compilation scripts on the latest versions of macOS and Linux have been reported to us recently. You may have to manually compile codes with commands set in the scripts and install the resulting shared libraries in the ad hoc folders for executing vOptSpecific. Sorry for these inconveniences. **Problem fixed (24-07-2021)**.
 
 ## Instructions 
 For an use, a working version of:
@@ -37,7 +39,6 @@ Before your first use,
 ```
 julia> using Pkg
 julia> Pkg.add("vOptSpecific")
-julia> Pkg.build("vOptSpecific")
 ```
 
 That's all folk; at this point, vOptSpecific is properly installed.
